@@ -1,22 +1,22 @@
 {
   "development": {
-    "username": "september_dev",
-    "password": null,
-    "database": "september_dev_db",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "september_dev",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
   },
   "test": {
-    "username": "september_prod",
+    "username": "caiyunliu",
     "password": null,
-    "database": "september_dev_test",
+    "database": "september_test",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
   },
   "production": {
-    "username": "september_prod",
+    "username": "caiyunliu",
     "password": null,
     "database": "september_prod",
     "host": "127.0.0.1",
