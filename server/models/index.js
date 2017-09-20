@@ -14,16 +14,15 @@ if (config.use_env_variable) {
     config.database, config.username, config.password, config
   );
 }
-
 fs
   .readdirSync(__dirname)
   .filter(file =>
-    (file.indexOf('.') !== 0) &&
-    (file !== basename) &&
-    (file.slice(-3) === '.js'))
+    (file.indexOf('.') !== 0) &&  //filter hidden files
+    (file !== basename) && // filter current file index.js
+    (file.slice(-3) === '.js')) // filter non-js file
   .forEach(file => {
-    const model = sequelize.import(path.join(__dirname, file));
-    db[model.name] = model;
+    const model = sequelize.import(path.join(__dirname, file)); //import model one by one
+    db[model.name] = model; // store the mode in db namespace;
   });
 
 Object.keys(db).forEach(modelName => {
