@@ -1,3 +1,4 @@
+/*
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var user = sequelize.define('User', {
@@ -11,3 +12,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   return user;
 };
+*/
+const mongoose = require('mongoose');
+const {Schema} = mongoose;
+const userSchema = new Schema({googleId : String});
+mongoose.model('users', userSchema);
