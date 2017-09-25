@@ -5,6 +5,9 @@ import App from './components/App';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
+import 'materialize-css/dist/css/materialize.min.css';
+
+//import are handled by webpack
 
 
 //data/redux setup
