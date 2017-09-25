@@ -5,10 +5,6 @@ module.exports = (app) => {
     res.send('respond with a resource');
   });
   app.post('/users', function(req, res) {
-    models.User.create({
-      email: req.body.email
-    }).then(function(user) {
-      res.json(user);
-    });
+    
   });
 }

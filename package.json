@@ -2,11 +2,12 @@
   "name": "september",
   "version": "0.0.0",
   "private": true,
+
   "scripts": {
     "start": "node ./bin/www",
     "dev-server": "nodemon ./bin/www",
     "dev-client": "npm run start --prefix client",
-    "dev-start": "concurrently --allow-restart \"npm  run dev-server\" \"npm run dev-client\""
+    "dev-start": "concurrently \"npm  run dev-server\" \"npm run dev-client\""
   },
   "dependencies": {
     "body-parser": "~1.17.1",
