@@ -3,10 +3,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from './Header';
 import * as actions from '../actions'
+import Landing from './Landing'
 
 const Dashboard = ()=> <h2>Dashboard</h2>;
 const SurveyNew = ()=> <h2>SurveyNew</h2>;
-const Landing = ()=> <h2> Landing</h2>;
 
 //view setup
 class App extends React.Component {
@@ -19,12 +19,14 @@ class App extends React.Component {
                 <BrowserRouter>
                     <div>
                         <Header/>
+                         <Route path="/" component={Landing}></Route>
                         <Route path="/dashboard" component={Dashboard}></Route>
-                        <Route path="/surveys" component={SurveyNew}></Route>
-                        <Route path="/surveys/new" component={Landing}></Route>
+                        <Route path="/surveys" component={SurveyNew}></Route>   
                     </div>
                 </BrowserRouter>
             </div>)
     }
 }
+//Connects a React component to a Redux store.
+//connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
 export default connect(null, actions)(App);

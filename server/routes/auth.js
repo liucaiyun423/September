@@ -1,19 +1,18 @@
-const googleAuthCallback = '/auth/google/callback';
 module.exports = (app, passport) => {
     app.get('/auth/google', 
         passport.authenticate('google',{scope: ['profile','email']}));
-    app.get(googleAuthCallback,
+    app.get('/auth/google/callback',
             passport.authenticate('google'),
             (req, res) => {
-                console.log("google callback res ", res);
-                res.redirect('/api/current_user');
+                console.log("google auth finished, redirecting");
+                res.redirect('/dashboard');
          });
     app.get('/api/current_user', 
         (req,res)=>{console.log("res",res);
-            res.send(req.user)
+            res.send(req.user);
         });
     app.get('/api/logout', (req, res)=>{ 
             req.logout();
-            res.send(req.user)
+            res.redirect('/dashboard');
         });
 }

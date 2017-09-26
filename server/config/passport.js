@@ -5,11 +5,19 @@ require("../models/mongo/user");
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
-passport.serializeUser((user, done)=> {done(null, user.id)});
+passport.serializeUser((user, done)=> {
+    console.log("serializing user : ", user);
+    done(null, user.id);
+});
 
-passport.deserializeUser((id,done)=>{
-    User.findById(id)
-        .then(user=>{done(null, user)});
+passport.deserializeUser(async (id,done)=>{
+    const user = await User.findById(id);
+    console.log("deserializing user: ", user);
+    if(user)
+        done(null, user);
+    else{
+         cone(null, user);
+    }
 });
 
 passport.use(new GoogleStrategy({
@@ -18,13 +26,13 @@ passport.use(new GoogleStrategy({
         callbackURL: 'http://localhost:3000/auth/google/callback'
     }, 
     async (accessToken, refreshToken, profile, done) => {
-        console.log("profile : ", profile);
-        const existingUser = User.findOne({googleId: profile.id})
+        const existingUser = await User.findOne({googleId: profile.id})
         if(existingUser){
-            console.log("skip creating new user : ");
+            console.log("google auth existingUser : ", existingUser);
             return done(null, existingUser);
         }
-        const user = new User({ googleId: profile.id}).save();
+        const user = await new User({ googleId: profile.id}).save();
+        console.log("google auth new user : ", user);
         done(null,user);
     })
 );
