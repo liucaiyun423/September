@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "dev-server": "nodemon ./bin/www",
     "dev-client": "npm run start --prefix client",
-    "dev-start": "concurrently \"npm  run dev-server\" \"npm run dev-client\""
+    "dev-start": "concurrently \"npm  run dev-server\" \"npm run dev-client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
