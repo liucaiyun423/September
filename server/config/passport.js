@@ -1,7 +1,7 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('./keys');
-require("../models/mongo/user");
+require("../models");
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
@@ -14,7 +14,7 @@ passport.deserializeUser(async (id,done)=>{
     if(user)
         done(null, user);
     else{
-        cone(null, user);
+        done(null, user);
     }
 });
 

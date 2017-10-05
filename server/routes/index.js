@@ -1,4 +1,3 @@
-var models = require('../models');
 module.exports = (app, passport) => {
   require('./auth')(app, passport);
   require('./users')(app);

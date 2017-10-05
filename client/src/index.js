@@ -8,6 +8,9 @@ import reducers from './reducers';
 import 'materialize-css/dist/css/materialize.min.css';
 import thunk from 'redux-thunk';
 
+import axios from 'axios';
+window.axios = axios;
+
 //import are handled by webpack
 
 

@@ -1,2 +1,2 @@
 require('./mongo/User');
-require('./mongo/Recipient');
+require('./mongo/Survey');
