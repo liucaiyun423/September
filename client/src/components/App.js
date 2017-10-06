@@ -5,8 +5,7 @@ import Header from './Header';
 import * as actions from '../actions';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
-
-const SurveyNew = ()=> <h2>SurveyNew</h2>;
+import SurveyNew from './surveys/SurveyNew';
 
 //view setup
 class App extends React.Component {
@@ -17,9 +16,9 @@ class App extends React.Component {
         return (
             <div>
                 <BrowserRouter>
-                    <div>
+                    <div className='container'>
                         <Header/>
-                         <Route path="/" component={Landing}></Route>
+                        <Route path="/" component={Landing}></Route>
                         <Route path="/dashboard" component={Dashboard}></Route>
                         <Route path="/surveys" component={SurveyNew}></Route>   
                     </div>
