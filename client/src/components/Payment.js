@@ -21,3 +21,4 @@ class Payment extends Component{
 //Connects a React component to a Redux store.
 //connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
 export default  connect(null, actions)(Payment);
+//actions is passed so Payment component can call handleToken

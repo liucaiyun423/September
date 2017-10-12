@@ -18,10 +18,9 @@ class SurveyForm extends React.Component{
         return (<div>
                     <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}> 
                         {this.renderFields()}
-                        <button className='teal left btn-left white-text'>
+                        <Link to='/surveys'  className='red  btn-flat left white-text'>
                             Cancel
-                            <Link to='/surveys/' />
-                        </button>
+                        </Link>
                         <button type='submit' className='teal btn-flat right white-text'>
                             NEXT
                             <i className='material-icons right' >done</i>
@@ -34,6 +33,7 @@ function validate(values){
     let errors= {};
     return errors;
 }
+//Creates a decorator with which you use redux-form to connect your form component to Redux.
 export default reduxForm({
     form: 'surveyForm',
     validate,

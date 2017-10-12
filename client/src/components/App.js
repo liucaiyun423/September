@@ -20,7 +20,7 @@ class App extends React.Component {
                         <Header/>
                         <Route path="/" component={Landing}></Route>
                         <Route path="/dashboard" component={Dashboard}></Route>
-                        <Route path="/surveys" component={SurveyNew}></Route>   
+                        <Route path="/surveys/new" component={SurveyNew}></Route>   
                     </div>
                 </BrowserRouter>
             </div>)
@@ -29,3 +29,4 @@ class App extends React.Component {
 //Connects a React component to a Redux store.
 //connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
 export default connect(null, actions)(App);
+//actions is passed so that App component can call fetchUser() in componentDidMount; 
