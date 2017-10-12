@@ -17,16 +17,17 @@ module.exports = (app)=> {
     });
 
     app.post('/api/surveys/webhooks', (req,res)=>{
-        const events = _.map(req.body, (event)=>{
-           const pathname = new URL(event.url).pathname;
-           const p = new Path("/api/surveys/:surveyId/:choice");
-           const match = p.test(pathname);
-           if(match){
-               return {email: event.email, surveyId: match.surveyId, choice: match.choice};
-           }
-        });
-        const compactEvents = _.compact(events);
-        const uniqEvents = _.uniqBy(compactEvents, 'surveyId','choice');
+        const p = new Path("/api/surveys/:surveyId/:choice");
+        const events = _.chain(req.body)
+                .map(({url, email})=>{
+                    const match = p.test(new URL(url).pathname);
+                    if(match){
+                        return {email: email, surveyId: match.surveyId, choice: match.choice};
+                    }
+                })
+                .compact()
+                .uniqBy('surveyId','choice')
+                .value();
         res.send(200);
     });
 
