@@ -9,18 +9,32 @@ class SurveyList extends Component{
     renderSurveys(){
         console.log(this.props.surveys);
         return this.props.surveys.map(survey=>{
-            return (<div>
-                        {survey.title}
-                        {survey.yes}
-                        {survey.no}
-                    </div>)
-            
+            return (
+                <tbody>
+                    <tr>
+                        <td>{survey.title}</td>
+                        <td>{survey.subject}</td>
+                        <td>{survey.yes}</td>
+                        <td>{survey.no}</td>
+                        <td>{survey.recipients.map(({email}) => email)}</td>
+                    </tr>
+                </tbody>
+            )
         })
     }
     render(){
-        return (<div>
+        return (<table>
+                     <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Title</th>
+                            <th>Yes</th>
+                            <th>No</th>
+                            <th>Recipients</th>
+                        </tr>
+                    </thead>
                     {this.renderSurveys()}
-                </div>);
+                </table>);
     }
 } 
 function mapStateToProps({surveys}){
