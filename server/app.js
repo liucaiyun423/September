@@ -10,6 +10,9 @@ const passport = require('passport');
 
 const app = express();
 
+mongoose.Promise = global.Promise;
+mongoose.connect(keys.mongoURI);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -31,7 +34,6 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(keys.mongoURI);
 require('./config/passport');
 require('./routes/index')(app, passport);
 

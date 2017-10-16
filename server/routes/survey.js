@@ -10,7 +10,11 @@ const Path = require("path-parser");
 const {URL} = require('url');
 
 module.exports = (app)=> {
-
+    app.get('/api/surveys', async (req, res)=>{
+        const surveys = await Survey.find({_user : req.user.id});
+        console.log("~~~~~~~~~~", surveys);
+        res.send(surveys);
+    });
     app.get('/api/surveys/:surveyId/:choice', (req, res) => {
         console.log("'/api/surveys/:surveyId/:choice", req.body);
         res.send('Thanks for voting!');
@@ -58,6 +62,7 @@ module.exports = (app)=> {
             title,
             subject,
             recipients: recipients.split(',').map(email=>{ return {email: email.trim()}}),
+            _user: req.user.id
         });
         const mailer = new SurveyMailer(survey, surveyTemplate(survey));
         try{
