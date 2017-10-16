@@ -16,9 +16,10 @@ module.exports = (app)=> {
         res.send('Thanks for voting!');
     });
 
-    app.post('/api/surveys/webhooks', (req,res)=>{
-        const p = new Path("/api/surveys/:surveyId/:choice");
-        const events = _.chain(req.body)
+    app.post('/api/surveys/webhooks', async (req,res)=>{
+        try{
+            const p = new Path("/api/surveys/:surveyId/:choice");
+            _.chain(req.body)
                 .map(({url, email})=>{
                     const match = p.test(new URL(url).pathname);
                     if(match){
@@ -27,8 +28,28 @@ module.exports = (app)=> {
                 })
                 .compact()
                 .uniqBy('surveyId','choice')
+                .each(({ surveyId, email, choice }) => {
+                    Survey.update(
+                        {
+                            _id: surveyId,
+                            recipients: {
+                                $elemMatch: { email: email, responded: false }
+                            }
+                        },
+                        {
+                            $inc: { [choice]: 1 },
+                            $set: { 'recipients.$.responded': true },
+                            lastResponded: new Date()
+                        }
+                    );
+                })
                 .value();
-        res.send(200);
+        }catch(e){
+            console.log(e);
+        }finally{
+            res.send(200);
+        }
+        
     });
 
     app.post('/api/surveys', requireCredit, async (req, res)=>{
@@ -49,7 +70,6 @@ module.exports = (app)=> {
             console.log("user updated");
             res.send(user);
         }catch(err){
-            console.log("!!!!!!!!!!!!! error caught in route handler");
             res.status(422).send(err);
         }   
     });
