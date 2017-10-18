@@ -23,7 +23,9 @@ class SurveyList extends Component{
         })
     }
     render(){
-        return (<table>
+        return (
+            <div>
+                <table>
                      <thead>
                         <tr>
                             <th>Subject</th>
@@ -31,10 +33,13 @@ class SurveyList extends Component{
                             <th>Yes</th>
                             <th>No</th>
                             <th>Recipients</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     {this.renderSurveys()}
-                </table>);
+                </table>
+            </div>
+                );
     }
 } 
 function mapStateToProps({surveys}){

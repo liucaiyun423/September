@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER , FETCH_SURVEYS} from './types';
+import { FETCH_USER , FETCH_SURVEYS, FETCH_TOTAL} from './types';
 
 
 //action creator
@@ -22,6 +22,12 @@ export const submitSurvey = (values,history) => async dispatch => {
 
 export const fetchSurveys = () => async dispatch => {
     const res = await axios.get('/api/surveys');
-    console.log("~~~~~~~~~~", res.data);
+    console.log("~~~~~~~~~~fetched surveys", res.data);
     dispatch({type: FETCH_SURVEYS, payload: res.data});
+}
+
+export const fetchTotal = (model)=> async dispatch => {
+    console.log("fetching total");
+    const res = await axios.get(`/api/${model}/count`);
+    dispatch({type: FETCH_TOTAL, payload: {total: res.data.total, model: model }});
 }

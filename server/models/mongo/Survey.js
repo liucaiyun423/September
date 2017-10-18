@@ -1,5 +1,6 @@
 const mongoose= require('mongoose');
 const  {Schema} = mongoose;
+const mongoosePaginate = require('mongoose-paginate');
 
 const RecipientSchema = require('./Recipient');
 const surveySchema = 
@@ -13,5 +14,6 @@ const surveySchema =
                 dateSent: Date,
                 lastResponded: Date
             });
-
+              
+surveySchema.plugin(mongoosePaginate);
 mongoose.model('surveys', surveySchema);

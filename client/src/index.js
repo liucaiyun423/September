@@ -8,6 +8,7 @@ import reducers from './reducers';
 import 'materialize-css/dist/css/materialize.min.css';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import 'fixed-data-table-2/dist/fixed-data-table.css'
 
 
 import axios from 'axios';
