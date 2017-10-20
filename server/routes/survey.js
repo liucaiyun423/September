@@ -12,17 +12,14 @@ const {URL} = require('url');
 module.exports = (app)=> {
     app.get('/api/surveys', async (req, res)=>{
         const surveys = await Survey.find({_user : req.user.id});
-        console.log("~~~~~~~~~~", surveys);
         res.send(surveys);
     });
 
     app.get('/api/surveys/count', async (req, res)=>{
         const total = await Survey.count({_user : req.user.id});
-        console.log("~~~~~~~~~~", total);
         res.send({total});
     });
     app.get('/api/surveys/:surveyId/:choice', (req, res) => {
-        console.log("'/api/surveys/:surveyId/:choice", req.body);
         res.send('Thanks for voting!');
     });
 
